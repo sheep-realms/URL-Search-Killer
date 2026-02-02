@@ -36,13 +36,14 @@ function findLastMatchingRule(rawUrl) {
         const regex = new RegExp(`^${pattern}`, 'i');
         if (regex.test(target)) {
             matched = rule;
+            matched.keep ??= []; 
         }
     }
 
     return matched;
 }
 
-function cleanUrl(rawUrl, keepParams) {
+function cleanUrl(rawUrl, keepParams = []) {
     let url;
     try {
         url = new URL(rawUrl);

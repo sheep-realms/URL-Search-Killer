@@ -6,23 +6,28 @@ const rules = [
     },
     {
         title: '阿里1688/商品',
-        match: 'detail.1688.com/offer/*.html*',
-        keep: []
+        match: 'detail.1688.com/offer/*.html*'
+    },
+    {
+        title: 'Bilibili/音频',
+        match: 'www.bilibili.com/audio/*'
+    },
+    {
+        title: 'Bilibili/专栏',
+        match: 'www.bilibili.com/read/*'
     },
     {
         title: 'Bilibili/视频',
         match: 'www.bilibili.com/video/*',
-        keep: ['t', 'p']
+        keep: ['p', 't']
     },
     {
         title: '京东/商品',
-        match: 'item.jd.com/*.html*',
-        keep: []
+        match: 'item.jd.com/*.html*'
     },
     {
         title: '腾讯文档/通用',
-        match: 'docs.qq.com/*/*',
-        keep: []
+        match: 'docs.qq.com/*/*'
     },
     {
         title: '腾讯文档/表格',
