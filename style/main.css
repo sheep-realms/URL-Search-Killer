@@ -44,8 +44,8 @@ input:disabled {
 }
 
 .radio-label>input {
-    width: 1.5em;
-    height: 1.5em;
+    width: 1.5rem;
+    height: 1.5rem;
 }
 
 textarea, input {
@@ -57,7 +57,7 @@ textarea, input {
 }
 
 textarea {
-    min-height: 6em;
+    min-height: 6rem;
     resize: vertical;
 }
 
@@ -79,6 +79,11 @@ button, a.button {
     cursor: pointer;
     text-decoration: none;
     color: inherit;
+    font-size: 1rem;
+    min-width: 6rem;
+    line-height: 1.5rem;
+    text-align: center;
+    box-sizing: border-box;
 }
 
 button:active, a.button:active {
@@ -87,6 +92,10 @@ button:active, a.button:active {
 
 a.button {
     display: none;
+    font-size: 1rem;
+    min-width: 6rem;
+    line-height: 1.5rem;
+    box-sizing: border-box;
 }
 
 .hint {
