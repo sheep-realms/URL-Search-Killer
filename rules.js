@@ -12,7 +12,7 @@ const rules = [
     {
         title: 'Bilibili/视频',
         match: 'www.bilibili.com/video/*',
-        keep: ['t']
+        keep: ['t', 'p']
     },
     {
         title: '京东/商品',
