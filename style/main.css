@@ -40,7 +40,7 @@ input:disabled {
 .radio-group {
     display: flex;
     flex-wrap: wrap;
-    gap: 32px;
+    gap: 16px;
 }
 
 .radio-label>input {

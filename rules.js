@@ -20,6 +20,16 @@ const rules = [
         keep: []
     },
     {
+        title: '腾讯文档/通用',
+        match: 'docs.qq.com/*/*',
+        keep: []
+    },
+    {
+        title: '腾讯文档/表格',
+        match: 'docs.qq.com/sheet/*',
+        keep: ['tab']
+    },
+    {
         title: '淘宝/商品',
         match: 'item.taobao.com/item.htm*',
         keep: ['id']
