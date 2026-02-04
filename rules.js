@@ -34,6 +34,11 @@ const rules = [
         match: 'item.jd.com/*.html*'
     },
     {
+        title: '即时设计/文件',
+        match: 'js.design/f/*',
+        keep: ['p']
+    },
+    {
         title: '腾讯文档/通用',
         match: 'docs.qq.com/*/*'
     },
