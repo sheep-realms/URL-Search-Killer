@@ -13,6 +13,14 @@ const rules = [
         match: 'www.bilibili.com/audio/*'
     },
     {
+        title: 'Bilibili/剧集/列表',
+        match: 'www.bilibili.com/bangumi/list/*'
+    },
+    {
+        title: 'Bilibili/剧集/播放',
+        match: 'www.bilibili.com/bangumi/play/*'
+    },
+    {
         title: 'Bilibili/专栏',
         match: 'www.bilibili.com/read/*'
     },
