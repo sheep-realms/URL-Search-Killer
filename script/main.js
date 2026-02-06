@@ -18,23 +18,22 @@ function findLastMatchingRule(rawUrl) {
         return null;
     }
 
-    const target = url.host + url.pathname + url.search + url.hash;
+    const target = url.host + url.pathname;
+    const targetHasSearch = url.host + url.pathname + url.search + url.hash;
 
     let matched = null;
     for (const rule of rules) {
         let pattern = rule.match.trim();
-
-        if (pattern.startsWith('*.')) {
-            pattern = '(.+\\.)?' + pattern.slice(2);
-        }
 
         pattern = pattern
             .replace(/[.+?^${}()|[\]\\]/g, '\\$&')
             .replace(/\\\(\.\+\\\.\\\)\?/g, '(.+\\.)?')
             .replace(/\*/g, '.*');
 
+        if (!rule.has_search) pattern += '$'
+
         const regex = new RegExp(`^${pattern}`, 'i');
-        if (regex.test(target)) {
+        if (regex.test(rule.has_search ? targetHasSearch : target)) {
             matched = rule;
             matched.keep ??= []; 
         }
