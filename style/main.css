@@ -3,15 +3,82 @@
     padding: 0;
 }
 
+:root {
+    --main-color: #991b1b;
+
+    --page-background: #ffffff;
+    --input-background: #ffffff;
+    --border-color: #64748b;
+
+    --text-primary: #0f172a;
+    --text-regular: #334155;
+    --text-secondary: #475569;
+    --text-placeholder: #94a3b8;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --main-color: #dc2626;
+
+        --page-background: #1e293b;
+        --input-background: #293548;
+        --border-color: #64748b;
+
+        --text-primary: #f8fafc;
+        --text-regular: #e2e8f0;
+        --text-secondary: #94a3b8;
+        --text-placeholder: #64748b;
+    }
+}
+
+@media (prefers-contrast: more) {
+    :root {
+        --main-color: #7f1d1d;
+
+        --page-background: #fff;
+        --input-background: #fff;
+        --border-color: #000;
+
+        --text-primary: #000;
+        --text-regular: #222;
+        --text-secondary: #333;
+        --text-placeholder: #444;
+    }
+}
+
+@media (prefers-contrast: more) and (prefers-color-scheme: dark) {
+    :root {
+        --main-color: #ef4444;
+
+        --page-background: #000;
+        --input-background: #000;
+        --border-color: #fff;
+
+        --text-primary: #fff;
+        --text-regular: #ddd;
+        --text-secondary: #ccc;
+        --text-placeholder: #bbb;
+    }
+}
+
 body {
     line-height: 1.5;
     padding: 16px;
     max-width: 900px;
     margin: 0 auto;
+    color: var(--text-regular);
+    background-color: var(--page-background);
 }
 
 h1 {
     font-size: 1.4rem;
+    text-align: center;
+    color: var(--text-primary);
+}
+
+img#site-title {
+    height: 4rem;
+    -webkit-user-drag: none;
 }
 
 label:not(.radio-label),
@@ -19,6 +86,7 @@ label:not(.radio-label),
     display: block;
     margin-top: 12px;
     font-weight: 600;
+    color: var(--text-primary);
 }
 
 .radio-label {
@@ -28,13 +96,9 @@ label:not(.radio-label),
     cursor: pointer;
 }
 
-input:disabled {
-    cursor: not-allowed;
-}
-
 .radio-label:has(input:disabled) {
     cursor: not-allowed;
-    color: #888;
+    color: var(--text-placeholder);
 }
 
 .radio-group {
@@ -46,6 +110,7 @@ input:disabled {
 .radio-label>input {
     width: 1.5rem;
     height: 1.5rem;
+    cursor: pointer;
 }
 
 textarea, input {
@@ -54,6 +119,24 @@ textarea, input {
     padding: 8px;
     margin-top: 4px;
     font-family: monospace;
+    background-color: var(--input-background);
+    border: 1px var(--border-color) solid;
+    accent-color: var(--main-color);
+    color: var(--text-primary);
+}
+
+input:focus-visible,
+textarea:focus-visible {
+    outline: 2px var(--main-color) solid;
+}
+
+input:disabled {
+    cursor: not-allowed;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: var(--text-placeholder);
 }
 
 textarea {
@@ -74,8 +157,8 @@ textarea {
 
 button, a.button {
     padding: 8px 14px;
-    border: 1px solid #ccc;
-    background: #f5f5f5;
+    border: 1px var(--main-color) solid;
+    background: transparent;
     cursor: pointer;
     text-decoration: none;
     color: inherit;
@@ -84,6 +167,23 @@ button, a.button {
     line-height: 1.5rem;
     text-align: center;
     box-sizing: border-box;
+    color: var(--main-color);
+}
+
+button:hover, a.button:hover,
+button:focus-visible, a.button:focus-visible {
+    background-color: var(--main-color);
+    color: #ffffff;
+    outline: none;
+}
+
+@media (forced-colors: active) or ((prefers-contrast: more) and (prefers-color-scheme: dark)) {
+    button:hover, a.button:hover,
+    button:focus-visible, a.button:focus-visible {
+        background-color: transparent;
+        color: var(--main-color);
+        outline: 2px var(--main-color) solid;
+    }
 }
 
 button:active, a.button:active {
@@ -100,15 +200,15 @@ a.button {
 
 .hint {
     font-size: 0.85rem;
-    color: #555;
     margin-top: 4px;
+    color: var(--text-secondary);
 }
 
 .now-rule {
     font-size: 0.85rem;
-    color: #555;
     margin-top: 4px;
     font-weight: bold;
+    color: var(--text-secondary);
 }
 
 .drop {
