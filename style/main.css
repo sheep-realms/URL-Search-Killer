@@ -70,6 +70,10 @@ body {
     background-color: var(--page-background);
 }
 
+header {
+    min-height: 4rem;
+}
+
 h1 {
     font-size: 1.4rem;
     text-align: center;
@@ -212,17 +216,17 @@ a.button {
 }
 
 .drop {
-    border: 2px dashed #ccc;
+    border: 2px dashed #fff;
     padding: 12px;
     margin-top: 12px;
     text-align: center;
-    color: #666;
+    color: #fff;
 }
 
 .drop-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.45);
+    background: rgba(0, 0, 0, 0.5);
     display: none;
     align-items: center;
     justify-content: center;
@@ -243,6 +247,6 @@ a.button {
 }
 
 .drop.dragover {
-    border-color: #666;
+    border-color: #fff;
     color: #000;
 }

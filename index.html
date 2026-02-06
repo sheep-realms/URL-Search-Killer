@@ -7,55 +7,59 @@
     <link rel="stylesheet" href="style/main.css">
 </head>
 <body>
-    <h1>
-        <picture>
-            <source
-                srcset="assets/title_dark.svg"
-                media="(prefers-color-scheme: dark)"
-            >
-            <img
-                id="site-title"
-                src="assets/title.svg"
-                alt="URL Search Killer"
-                draggable="false"
-            >
-        </picture>
-    </h1>
+    <header>
+        <h1>
+            <picture>
+                <source
+                    srcset="assets/title_dark.svg"
+                    media="(prefers-color-scheme: dark)"
+                >
+                <img
+                    id="site-title"
+                    src="assets/title.svg"
+                    alt="URL Search Killer"
+                    draggable="false"
+                >
+            </picture>
+        </h1>
+    </header>
 
-    <div class="row">
-        <label for="urlInput">URL 输入</label>
-        <textarea id="urlInput" placeholder="在此输入或拖拽 URL"></textarea>
-        <div class="hint">使用内置规则时，往这里拖拽的 URL 若命中匹配规则会自动打开页面<br>另外，您还可以通过 URL 参数 “url” 传入已编码的 URL，这会自动尝试跳转</div>
-        <div class="now-rule" aria-live="polite">
-            <span>当前匹配规则：</span>
-            <span id="now-rule">无</span>
+    <main>
+        <div class="row">
+            <label for="urlInput">URL 输入</label>
+            <textarea id="urlInput" placeholder="在此输入或拖拽 URL"></textarea>
+            <div class="hint">使用内置规则时，往这里拖拽的 URL 若命中匹配规则会自动打开页面<br>另外，您还可以通过 URL 参数 “url” 传入已编码的 URL，这会自动尝试跳转</div>
+            <div class="now-rule" aria-live="polite">
+                <span>当前匹配规则：</span>
+                <span id="now-rule">无</span>
+            </div>
         </div>
-    </div>
 
-    <div class="row" role="radiogroup" aria-labelledby="param-mode-group-title">
-        <div id="param-mode-group-title" class="label">参数来源</div>
-        <div class="radio-group">
-            <label class="radio-label"><input type="radio" name="paramMode" value="auto" checked /> 自动判断</label>
-            <label class="radio-label"><input type="radio" name="paramMode" value="rules" /> 内置规则</label>
-            <label class="radio-label"><input type="radio" name="paramMode" value="manual" /> 手动输入</label>
+        <div class="row" role="radiogroup" aria-labelledby="param-mode-group-title">
+            <div id="param-mode-group-title" class="label">参数来源</div>
+            <div class="radio-group">
+                <label class="radio-label"><input type="radio" name="paramMode" value="auto" checked /> 自动判断</label>
+                <label class="radio-label"><input type="radio" name="paramMode" value="rules" /> 内置规则</label>
+                <label class="radio-label"><input type="radio" name="paramMode" value="manual" /> 手动输入</label>
+            </div>
         </div>
-    </div>
 
-    <div class="row">
-        <label for="keepParams">保留参数</label>
-        <input id="keepParams" />
-        <div class="hint">使用英文逗号分隔参数</div>
-    </div>
+        <div class="row">
+            <label for="keepParams">保留参数</label>
+            <input id="keepParams" />
+            <div class="hint">使用英文逗号分隔参数</div>
+        </div>
 
-    <div class="row">
-        <label for="urlOutput">URL 输出</label>
-        <textarea id="urlOutput" readonly></textarea>
-    </div>
+        <div class="row">
+            <label for="urlOutput">URL 输出</label>
+            <textarea id="urlOutput" readonly></textarea>
+        </div>
 
-    <div class="actions">
-        <button id="cleanBtn">输出</button>
-        <a id="jumpLink" class="button" target="_blank" rel="noreferrer noopener">跳转</a>
-    </div>
+        <div class="actions">
+            <button id="cleanBtn">输出</button>
+            <a id="jumpLink" class="button" target="_blank" rel="noreferrer noopener">跳转</a>
+        </div>
+    </main>
 
     <div id="dropOverlay" class="drop-overlay" aria-hidden="true">
         <div class="panel">将 URL 拖放至此处</div>
