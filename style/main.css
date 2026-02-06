@@ -39,6 +39,7 @@
 
         --page-background: #fff;
         --input-background: #fff;
+        --input-disabled-background: #fafaf9;
         --border-color: #000;
 
         --text-primary: #000;
@@ -54,6 +55,7 @@
 
         --page-background: #000;
         --input-background: #000;
+        --input-disabled-background: transparent;
         --border-color: #fff;
 
         --text-primary: #fff;
@@ -138,6 +140,11 @@ textarea:focus-visible {
 
 input:disabled {
     cursor: not-allowed;
+}
+
+input[type="text"],
+textarea {
+    font-family: Monaco, Consolas,'Lucida Console', 'Courier New', serif;
 }
 
 input[type="text"]:disabled {
