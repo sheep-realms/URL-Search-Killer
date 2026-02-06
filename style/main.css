@@ -8,6 +8,7 @@
 
     --page-background: #ffffff;
     --input-background: #ffffff;
+    --input-disabled-background: #f5f5f4;
     --border-color: #64748b;
 
     --text-primary: #0f172a;
@@ -22,6 +23,7 @@
 
         --page-background: #1e293b;
         --input-background: #293548;
+        --input-disabled-background: transparent;
         --border-color: #64748b;
 
         --text-primary: #f8fafc;
@@ -136,6 +138,11 @@ textarea:focus-visible {
 
 input:disabled {
     cursor: not-allowed;
+}
+
+input[type="text"]:disabled {
+    color: var(--text-secondary);
+    background-color: var(--input-disabled-background);
 }
 
 input::placeholder,

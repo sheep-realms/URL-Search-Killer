@@ -14,6 +14,10 @@ const rules = [
         keep: ['pn', 'wd']
     },
     {
+        title: '百度贴吧/主题帖',
+        match: 'tieba.baidu.com/p/*'
+    },
+    {
         title: 'Bilibili/音频',
         match: 'www.bilibili.com/audio/*'
     },
