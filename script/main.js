@@ -9,7 +9,6 @@ const rulesRadio = document.querySelector('input[value=rules]');
 const manualRadio = document.querySelector('input[value=manual]');
 const nowRuleLabel = document.getElementById('now-rule');
 
-
 function findLastMatchingRule(rawUrl) {
     let url;
     try {
@@ -18,8 +17,8 @@ function findLastMatchingRule(rawUrl) {
         return null;
     }
 
-    const target = url.host + url.pathname;
-    const targetHasSearch = url.host + url.pathname + url.search + url.hash;
+    const target            = url.host + url.pathname;
+    const targetHasSearch   = url.host + url.pathname + url.search + url.hash;
 
     let matched = null;
     for (const rule of rules) {
@@ -60,9 +59,9 @@ function cleanUrl(rawUrl, keepParams = []) {
 }
 
 function runClean(autoOpen = false) {
-    const rawUrl = urlInput.value.trim();
-    const mode = document.querySelector('input[name=paramMode]:checked').value;
-    if (!rawUrl) {
+    const rawText = urlInput.value.trim();
+    let mode = document.querySelector('input[name=paramMode]:checked').value;
+    if (!rawText) {
         rulesRadio.disabled = false;
         if (mode === 'auto') {
             keepParamsInput.disabled = false;
@@ -72,62 +71,97 @@ function runClean(autoOpen = false) {
         return;
     }
 
-    const rule = findLastMatchingRule(rawUrl);
+    const urls = rawText.split('\n').map(s => s.trim()).filter(Boolean);
+    const batchMode = urls.length > 1;
 
-    let keepParams = [];
+    let outputs = [];
 
-    // 自动模式（auto）
-    if (mode === 'auto') {
-        if (rule) {
-            keepParams = rule.keep;
-            keepParamsInput.value = keepParams.join(',');
-            keepParamsInput.disabled = true;
-            nowRuleLabel.innerHTML = rule.title.replace(/\//g, ' / ');
-        } else {
-            keepParamsInput.disabled = false;
-            keepParams = keepParamsInput.value.split(',');
-            nowRuleLabel.innerHTML = '无';
-        }
-    }
-
-    //  使用内置规则（rules）
-    else if (mode === 'rules') {
-        if (rule) {
-            keepParams = rule.keep;
-            keepParamsInput.value = keepParams.join(',');
-            keepParamsInput.disabled = true;
-            nowRuleLabel.innerHTML = rule.title.replace(/\//g, ' / ');
-        } else {
-            rulesRadio.disabled = true;
+    if (batchMode) {
+        rulesRadio.disabled = true;
+        nowRuleLabel.innerHTML = '批量处理';
+        if (rulesRadio.checked) {
             manualRadio.checked = true;
-            keepParamsInput.disabled = false;
-            keepParamsInput.value = '';
-            keepParams = [];
-            nowRuleLabel.innerHTML = '无';
+            mode = 'manual';
         }
-    }
-
-    // 自定义保留参数（manual）
-    else {
-        keepParamsInput.disabled = false;
-        keepParams = keepParamsInput.value.split(',');
-        nowRuleLabel.innerHTML = '无';
-    }
-
-    // rules 单选框是否可用只取决于是否有规则
-    rulesRadio.disabled = !rule;
-
-    const result = cleanUrl(rawUrl, keepParams);
-    urlOutput.value = result;
-
-    if (result) {
-        jumpLink.href = result;
-        jumpLink.style.display = 'inline-block';
-        if (autoOpen) {
-            window.open(result, '_blank', 'noreferrer');
+        if (mode === 'auto') {
+            keepParamsInput.disabled = true;
+            keepParamsInput.value = '';
         }
     } else {
-        jumpLink.style.display = 'none';
+        rulesRadio.disabled = false;
+    }
+
+    for (const rawUrl of urls) {
+        const rule = findLastMatchingRule(rawUrl);
+        let keepParams = [];
+
+
+        if (batchMode) {
+            if (mode === 'manual') {
+                keepParams = keepParamsInput.value.split(',');
+            } else {
+                keepParams = rule ? rule.keep : [];
+            }
+        } else {
+            rulesRadio.disabled = !rule;
+
+            // 自动模式（auto）
+            if (mode === 'auto') {
+                if (rule) {
+                    keepParams = rule.keep;
+                    keepParamsInput.value = keepParams.join(',');
+                    keepParamsInput.disabled = true;
+                    nowRuleLabel.innerHTML = rule.title.replace(/\//g, ' / ');
+                } else {
+                    keepParamsInput.disabled = false;
+                    keepParams = keepParamsInput.value.split(',');
+                    nowRuleLabel.innerHTML = '无';
+                }
+            }
+
+            //  使用内置规则（rules）
+            else if (mode === 'rules') {
+                if (rule) {
+                    keepParams = rule.keep;
+                    keepParamsInput.value = keepParams.join(',');
+                    keepParamsInput.disabled = true;
+                    nowRuleLabel.innerHTML = rule.title.replace(/\//g, ' / ');
+                } else {
+                    rulesRadio.disabled = true;
+                    manualRadio.checked = true;
+                    keepParamsInput.disabled = false;
+                    keepParamsInput.value = '';
+                    keepParams = [];
+                    nowRuleLabel.innerHTML = '无';
+                }
+            }
+
+            // 自定义保留参数（manual）
+            else {
+                keepParamsInput.disabled = false;
+                keepParams = keepParamsInput.value.split(',');
+                nowRuleLabel.innerHTML = '无';
+            }
+        }
+
+        const result = cleanUrl(rawUrl, keepParams);
+        if (result) {
+            outputs.push(result);
+        }
+    }
+
+
+    const finalResult = outputs.join('\n');
+    urlOutput.value = finalResult;
+
+    if (!batchMode && outputs[0]) {
+        jumpLink.href = outputs[0];
+        jumpLink.style.display = "inline-block";
+        if (autoOpen) {
+            window.open(outputs[0], "_blank", "noreferrer");
+        }
+    } else {
+        jumpLink.style.display = "none";
     }
 }
 
